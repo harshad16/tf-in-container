@@ -15,10 +15,10 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 # Usage :
-#	docker build --build-arg "TF_URL=${TF_URL}" -t aicoe/tf-in-fedora29:1.13 -f Dockerfile .
+#	docker build --build-arg "TF_URL=${TF_URL}" -t aicoe/tf-in-fedora30:1.13 -f Dockerfile .
 #   all releases of tensorflow wheel are here https://github.com/AICoE/tensorflow-wheels/releases
 
-FROM registry.fedoraproject.org/fedora:29
+FROM registry.fedoraproject.org/fedora:30
 
 ENV SUMMARY="plain TensorFlow container image"	\
     DESCRIPTION="This is a plain container image with TensorFlow in it." \
