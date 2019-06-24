@@ -46,7 +46,7 @@ ENV TEST_CMD="import tensorflow as tf ; a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0
 
 ARG TF_URL=https://github.com/AICoE/tensorflow-wheels/releases/download/tf-r1.13-cpu-2019-03-07_021827/tensorflow-1.13.1-cp37-cp37m-linux_x86_64.whl
 
-RUN INSTALL_PKGS="wget vim unzip which passwd shadow-utils krb5-libs vte-profile findutils file procps gcc python3-devel" && \
+RUN INSTALL_PKGS="wget vim unzip which toolbox-support findutils file procps gcc python3-devel" && \
   	dnf -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
 	wget $TF_URL && \
 	pip3 install tensorflow*.whl && \
