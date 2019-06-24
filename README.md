@@ -7,6 +7,7 @@ They can be used for testing and experimenting with tensorflow on following OS :
 * `Fedora27`
 * `Fedora28`
 * `Fedora29`
+* `Fedora30`
 * `CentOS7`
 * `RHEL7.5`
 * `RHEL8`
@@ -19,7 +20,7 @@ NOTE: for `RHEL7.5` & `RHEL8` you need a system with RHEL Subscription enabled.
 ### Build Image
 
 ```shell
-docker build --build-arg "TF_URL=${TF_URL}" -t aicoe/tf-in-fedora29:1.13.1 -f Dockerfile .
+docker build --build-arg "TF_URL=${TF_URL}" -t aicoe/tf-in-container:1.13.1-fedora30 -f Dockerfile .
 ```
 
 TF_URL value should be taken from https://github.com/AICoE/tensorflow-wheels/releases.
@@ -27,26 +28,24 @@ TF_URL value should be taken from https://github.com/AICoE/tensorflow-wheels/rel
 ### Use Image
 
 ```shell
-docker run -it aicoe/tf-in-fedora29:1.13.1 bash
+docker run -it quay.io/aicoe/tf-in-container:1.13.1-fedora30 bash
 ```
 
 ### Example
 
 ```shell
-$ docker run -it aicoe/tf-in-fedora29:1.13.1 bash
-[root@77f0c14df415 /]# python3 -c "import tensorflow as tf ; a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name='a') ; \
-> b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name='b') ; c = tf.matmul(a, b) ; \
-> sess = tf.Session(config=tf.ConfigProto(log_device_placement=True)) ;print(sess.run(c))"
+$ docker run -it quay.io/aicoe/tf-in-container:1.13.1-fedora30 bash
+[root@94fc148a10de /]# python3 -c "$TEST_CMD"
 Device mapping: no known devices.
-2019-03-07 16:48:31.165853: I tensorflow/core/common_runtime/direct_session.cc:317] Device mapping:
+2019-06-24 15:21:10.309103: I tensorflow/core/common_runtime/direct_session.cc:317] Device mapping:
 
 MatMul: (MatMul): /job:localhost/replica:0/task:0/device:CPU:0
-2019-03-07 16:48:31.167208: I tensorflow/core/common_runtime/placer.cc:1059] MatMul: (MatMul)/job:localhost/replica:0/task:0/device:CPU:0
+2019-06-24 15:21:10.311608: I tensorflow/core/common_runtime/placer.cc:1059] MatMul: (MatMul)/job:localhost/replica:0/task:0/device:CPU:0
 a: (Const): /job:localhost/replica:0/task:0/device:CPU:0
-2019-03-07 16:48:31.167243: I tensorflow/core/common_runtime/placer.cc:1059] a: (Const)/job:localhost/replica:0/task:0/device:CPU:0
+2019-06-24 15:21:10.311692: I tensorflow/core/common_runtime/placer.cc:1059] a: (Const)/job:localhost/replica:0/task:0/device:CPU:0
 b: (Const): /job:localhost/replica:0/task:0/device:CPU:0
-2019-03-07 16:48:31.167276: I tensorflow/core/common_runtime/placer.cc:1059] b: (Const)/job:localhost/replica:0/task:0/device:CPU:0
+2019-06-24 15:21:10.311816: I tensorflow/core/common_runtime/placer.cc:1059] b: (Const)/job:localhost/replica:0/task:0/device:CPU:0
 [[22. 28.]
  [49. 64.]]
-[root@77f0c14df415 /]#
+[root@94fc148a10de /]#
 ```
